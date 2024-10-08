@@ -1,7 +1,8 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
-
+	staticruntime "on"
+	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -24,7 +25,6 @@ project "GLFW"
 		"src/null_platform.h",
 		"src/null_joystick.h",
 		"src/null_init.c",
-
 		"src/null_monitor.c",
 		"src/null_window.c",
 		"src/null_joystick.c"
@@ -32,7 +32,6 @@ project "GLFW"
 
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "On" --staticly linking the runtime libraries
 
 		files
 		{
@@ -59,6 +58,10 @@ project "GLFW"
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
+
+	filter "configurations:Release"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Release"
 		runtime "Release"
